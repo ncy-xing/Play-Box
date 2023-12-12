@@ -37,7 +37,7 @@ class VanishingPoint {
 
   /* Check if the given cursor position is over the hitbox and sets hitbox color. */
   public boolean checkCursorOverBox(int x, int y) {
-    if (x > this.x-boxSize && y < this.x+boxSize &&
+    if (x > this.x-boxSize && x < this.x+boxSize &&
       y > this.y-boxSize && y < this.y+boxSize) {
       fillColor = activeColor;
       return true;
@@ -49,5 +49,13 @@ class VanishingPoint {
   public void move(float x, float y) {
     this.x = x;
     this.y = y;
+  }
+
+  public float getX() {
+    return x;
+  }
+
+  public float getY() {
+    return y;
   }
 }
