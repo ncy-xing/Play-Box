@@ -4,7 +4,7 @@ class VanishingPoint {
   private PApplet canvas;
   private float x;
   private float y;
-  private int boxSize = 15;
+  private int boxSize = 150;
   private int activeColor = color(255, 255, 255);
   private int passiveColor = color(153);
   private int fillColor;
