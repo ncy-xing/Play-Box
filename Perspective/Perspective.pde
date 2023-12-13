@@ -26,30 +26,13 @@ void draw() {
   background(0, 0, 0);
 
   vp.checkCursorOverBox(mouseX, mouseY);
-  //vp.display();
   vlines.display();
 
   translate(vp.getX(), vp.getY(), 0);
   center.display();
   translate(-vp.getX(), -vp.getY(), 0);
-
-  //if (keyCode == ENTER) {
-  //  toggle = true;
-  //  // Change height of the camera with mouseY
-  //  //camera(width/2, height/2, 220.0, // eyeX, eyeY, eyeZ
-  //  //  0, 0, 0.0, // centerX, centerY, centerZ
-  //  //  0.0, 1.0, 0.0); // upX, upY, upZ
-  //  //translate(xOffset, yOffset, 0);
-  //  //float fov = PI/3.0;
-  //  //float cameraZ = (height/2.0) / tan(fov/2.0);
-  //  //perspective(fov, aspect, cameraZ/10.0, cameraZ*10.0);
-  //  //float aspect = float(width)/float(height);
-  //  translate(vp.getX(), vp.getY(), 0);
-  //  rotateX(-PI/6);
-  //  rotateY(PI/3);
-  //  box(100);
-  //  translate(-vp.getX(), -vp.getY(), 0);
-  //}
+  
+  center.move();
 }
 
 void mousePressed() {
