@@ -19,8 +19,8 @@ void setup() {
 
   rectMode(CENTER);
   vp = new VanishingPoint(this, width/2, height/2);
-  vlines = new VanishingLines(this, vp);
   center = new Center(this, vp);
+  vlines = new VanishingLines(this, vp, center.getColor());
   boxSize = 10;
   animateOn = true;
 }
@@ -50,6 +50,7 @@ void draw() {
 
   if (keyPressed) {
     checkColorChange();
+    vlines.setColor(center.getColor());
   }
 }
 
