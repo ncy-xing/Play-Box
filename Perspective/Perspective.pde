@@ -23,8 +23,10 @@ void setup() {
 }
 
 void draw() {
+  colorMode(HSB, 400);
   lights();
   background(0, 0, 0);
+  pointLight(240, 220, 134, 200, -150, 0);
 
   if (vp.checkCursorOverBox(mouseX, mouseY)) {
     center.toggleActive(true);

@@ -4,11 +4,16 @@ class Center {
   private float xTilt; 
   private float yTilt;
   private color currentColor;
-  private int activeColor = color(255, 255, 255);
-  private int passiveColor = color(153);
-
+  private color activeColor;
+  private color passiveColor;
+  private float rotationOffset = PI/120.0;
+  
   Center(PApplet canvas, VanishingPoint vp) {
     this.canvas = canvas;
+    canvas.colorMode(HSB, 100);
+    activeColor = color(0, 0, 100);
+    passiveColor = color(195, 49, 73);
+    
     this.vp = vp;
     xTilt = 0;
     yTilt = 0;
@@ -22,9 +27,10 @@ class Center {
     canvas.rotateY(yTilt);
     box(100);
     
-    canvas.rotateX(-xTilt);
-    canvas.rotateY(-yTilt);
+    canvas.rotateX(-xTilt / 2);
+    canvas.rotateY(-yTilt / 2);
     box(100);
+    canvas.tint(255, 255);
   }
   
   public void toggleActive(boolean active) {
@@ -32,7 +38,7 @@ class Center {
   }
   
   public void move() {
-    xTilt += - PI / 100;
-    yTilt += PI / 100;
+    xTilt += rotationOffset;
+    yTilt += rotationOffset;
   };
 }
