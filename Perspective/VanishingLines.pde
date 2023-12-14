@@ -29,8 +29,8 @@ class VanishingLines {
     float cX = vp.getX();
     float cY = vp.getY();
 
-    canvas.stroke(transformColor(baseColor, hueChange, brightChange, 0));
     // Draw lines from bottom
+    canvas.stroke(transformColor(baseColor, hueChange, brightChange, 0));
     for (int x=0; x <= canvas.width; x+= canvas.width/DIVISIONS) {
       if (x == canvas.width / 2) {
         continue;
@@ -41,8 +41,8 @@ class VanishingLines {
       canvas.line(x, 0, x2, y2);
     }
 
-    canvas.stroke(transformColor(baseColor, 0, brightChange, satChange));
     // Draw lines from top
+    canvas.stroke(transformColor(baseColor, 0, brightChange, satChange));
     for (int x=0; x <= canvas.width; x+= canvas.width/DIVISIONS) {
       if (x == canvas.width / 2) {
         continue;
