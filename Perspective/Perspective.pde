@@ -23,10 +23,10 @@ void setup() {
 }
 
 void draw() {
-  colorMode(HSB, 400);
+  colorMode(HSB, 100);
   lights();
   background(0, 0, 0);
-  pointLight(240, 220, 134, 200, -150, 0);
+  pointLight(200, 50, 80, 200, -150, 0);
 
   if (vp.checkCursorOverBox(mouseX, mouseY)) {
     center.toggleActive(true);
@@ -51,6 +51,12 @@ void animate() {
 void keyPressed(){
   if (keyCode == ENTER) {
     animateOn = !animateOn;
+  }
+  if (keyCode == RIGHT) {
+    center.incrementHue(1);
+  } 
+  if (keyCode == LEFT) {
+    center.incrementHue(-1);
   }
 }
 void mousePressed() {
