@@ -1,5 +1,5 @@
 class Center {
-  private float COLOR_INCREMENT = 10;
+  private float COLOR_INCREMENT = 1;
   private PApplet canvas;
   private VanishingPoint vp;
   private float xTilt;
@@ -41,9 +41,11 @@ class Center {
   public void incrementHue(int direction) {
     float hue = hue(passiveColor);
     hue += (direction) * COLOR_INCREMENT;
-    if (hue > 100 || hue < 0) {
+    if (hue > 100) {
       hue = abs(100 % hue);
-    } 
+    } else if (hue < 0) {
+      hue = 100 - COLOR_INCREMENT;
+    }
     passiveColor = color(hue, saturation(passiveColor), brightness(passiveColor));
   };
 
@@ -51,4 +53,8 @@ class Center {
     xTilt += rotationOffset;
     yTilt += rotationOffset;
   };
+
+  public color getColor() {
+    return passiveColor;
+  }
 }

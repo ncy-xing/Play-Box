@@ -14,6 +14,9 @@ float yOffset = 0.0;
 
 void setup() {
   size(1000, 700, P3D);
+  surface.setTitle("Play Box");
+  surface.setResizable(true);
+
   rectMode(CENTER);
   vp = new VanishingPoint(this, width/2, height/2);
   vlines = new VanishingLines(this, vp);
@@ -27,6 +30,8 @@ void draw() {
   lights();
   background(0, 0, 0);
   pointLight(200, 50, 80, 200, -150, 0);
+  color c = center.getColor();
+  pointLight(hue(c), saturation(c), brightness(c), vp.getX(), vp.getY(), 0);
 
   if (vp.checkCursorOverBox(mouseX, mouseY)) {
     center.toggleActive(true);
@@ -38,9 +43,22 @@ void draw() {
   translate(vp.getX(), vp.getY(), 0);
   center.display();
   translate(-vp.getX(), -vp.getY(), 0);
-  
+
   if (animateOn) {
     animate();
+  }
+
+  if (keyPressed) {
+    checkColorChange();
+  }
+}
+
+void checkColorChange() {
+  if (keyCode == RIGHT) {
+    center.incrementHue(1);
+  }
+  if (keyCode == LEFT) {
+    center.incrementHue(-1);
   }
 }
 
@@ -48,15 +66,9 @@ void animate() {
   center.move();
 }
 
-void keyPressed(){
+void keyPressed() {
   if (keyCode == ENTER) {
     animateOn = !animateOn;
-  }
-  if (keyCode == RIGHT) {
-    center.incrementHue(1);
-  } 
-  if (keyCode == LEFT) {
-    center.incrementHue(-1);
   }
 }
 void mousePressed() {

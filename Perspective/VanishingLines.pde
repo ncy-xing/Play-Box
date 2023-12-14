@@ -28,6 +28,8 @@ class VanishingLines {
       canvas.line(x, 0, x2, y2);
     }
     
+    canvas.stroke(#0000FF);
+    
     // Draw lines from top
     for (int x=0; x <= canvas.width; x+= canvas.width/DIVISIONS) {
       if (x == canvas.width / 2) {
