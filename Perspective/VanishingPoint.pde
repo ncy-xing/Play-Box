@@ -47,8 +47,8 @@ class VanishingPoint {
   }
 
   public void move(float x, float y) {
-    this.x = x;
-    this.y = y;
+    this.x = constrain(x, 0, canvas.width);
+    this.y = constrain(y, 0, canvas.width);
   }
 
   public float getX() {

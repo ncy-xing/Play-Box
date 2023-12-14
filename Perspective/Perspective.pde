@@ -61,7 +61,7 @@ void mousePressed() {
 
 void mouseDragged() {
   if (vp.isSelected()) {
-    vp.move(min(width, mouseX), min(height, mouseY));
+    vp.move(mouseX, mouseY);
   }
 
   xOffset = mouseX-bx;
