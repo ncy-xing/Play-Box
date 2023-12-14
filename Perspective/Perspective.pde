@@ -8,7 +8,7 @@ int boxSize;
 boolean overBox = false;
 boolean locked = false;
 boolean toggle = false;
-
+boolean animateOn;
 float xOffset = 0.0;
 float yOffset = 0.0;
 
@@ -19,22 +19,38 @@ void setup() {
   vlines = new VanishingLines(this, vp);
   center = new Center(this, vp);
   boxSize = 10;
+  animateOn = true;
 }
 
 void draw() {
   lights();
   background(0, 0, 0);
 
-  vp.checkCursorOverBox(mouseX, mouseY);
+  if (vp.checkCursorOverBox(mouseX, mouseY)) {
+    center.toggleActive(true);
+  } else {
+    center.toggleActive(false);
+  }
   vlines.display();
 
   translate(vp.getX(), vp.getY(), 0);
   center.display();
   translate(-vp.getX(), -vp.getY(), 0);
   
+  if (animateOn) {
+    animate();
+  }
+}
+
+void animate() {
   center.move();
 }
 
+void keyPressed(){
+  if (keyCode == ENTER) {
+    animateOn = !animateOn;
+  }
+}
 void mousePressed() {
   boolean vpSelected = false;
   if (vp.checkCursorOverBox(mouseX, mouseY)) {
