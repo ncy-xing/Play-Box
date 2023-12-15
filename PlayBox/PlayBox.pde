@@ -1,3 +1,10 @@
+/*
+* Nancy Xing 
+* CSCI 3275
+* Dec 2023 
+* 
+* Main script for an animated, movable box with custom colors and particle effects.
+*/
 VanishingPoint vp;
 VanishingLines vlines;
 PGraphics pg;
@@ -15,9 +22,7 @@ Particle[] particles;
 int numParticles  = 0;
 int particleIndex = 0;
 int lastTime;
-
-Particle test;
-
+/* Initialize variables. */
 void setup() {
   size(1000, 700, P3D);
   surface.setTitle("Play Box");
@@ -35,10 +40,10 @@ void setup() {
   }
 }
 
+/* Cycles through list of particles, introducing new particle in each slot. */
 void addParticle() {
   particles[particleIndex] = new Particle(this, vp.getX(), vp.getY());
   particleIndex++;
-  // Increase our total bubbles in play, if we haven't filled the array yet.
   if (numParticles < particles.length) {
     numParticles++;
   }
@@ -47,20 +52,23 @@ void addParticle() {
   }
 }
 
+/* Check if given time interval has elapsed. */
 boolean atTimeInterval(int elapsed) {
   boolean result = elapsed - lastTime > 100;
   lastTime = millis();
   return result;
 }
 
+/* Repeatedly draw elements onto canvas. */
 void draw() {
+  // Background
   colorMode(HSB, 100);
   lights();
   background(0, 0, 0);
   pointLight(200, 50, 80, 200, -150, 0);
   color c = center.getColor();
   pointLight(hue(c), saturation(c), brightness(c), vp.getX(), vp.getY(), 0);
-
+  
   for (int i = 0; i < numParticles; i++) {
     particles[i].display();
     if (animateOn) {
@@ -73,14 +81,13 @@ void draw() {
   } else {
     center.toggleActive(false);
   }
-
   vlines.display();
   translate(vp.getX(), vp.getY(), 0);
   center.display();
   translate(-vp.getX(), -vp.getY(), 0);
 
   if (animateOn) {
-    animate();
+    center.move();
     addParticle();
   }
 
@@ -88,12 +95,9 @@ void draw() {
     checkColorChange();
     vlines.setColor(center.getColor());
   }
-
-  //if (atTimeInterval(millis())) {
-  //  addParticle();
-  //};
 }
 
+/* Change hue of center based on arrow key direction. */
 void checkColorChange() {
   if (keyCode == RIGHT) {
     center.incrementHue(1);
@@ -103,16 +107,14 @@ void checkColorChange() {
   }
 }
 
-void animate() {
-  //rotate center
-  center.move();
-}
-
+/* Pause animation when enter key pressed. */
 void keyPressed() {
   if (keyCode == ENTER) {
     animateOn = !animateOn;
   }
 }
+
+/* Select center. */
 void mousePressed() {
   boolean vpSelected = false;
   if (vp.checkCursorOverBox(mouseX, mouseY)) {
@@ -121,6 +123,7 @@ void mousePressed() {
   vp.setSelected(vpSelected);
 }
 
+/* Move center. */
 void mouseDragged() {
   if (vp.isSelected()) {
     vp.move(mouseX, mouseY);
@@ -130,6 +133,7 @@ void mouseDragged() {
   yOffset = mouseY-by;
 }
 
+/* Deselect center. */
 void mouseReleased() {
   vp.setSelected(false);
 }

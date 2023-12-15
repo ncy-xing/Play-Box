@@ -1,5 +1,11 @@
+/*
+* Models lines intersecting from the edge of the canvas into a given point.
+* Written for CSCI 3275 on Dec. 2023. 
+* @author Nancy Xing 
+*/
 class VanishingLines {
-  private int DIVISIONS = 4; // How many lines to draw starting from one side of the screen
+  // How many lines to draw starting from one side of the screen
+  private int DIVISIONS = 4; 
   private int COLOR_SET_SIZE = 3;
   private PApplet canvas;
   private VanishingPoint vp;
@@ -7,7 +13,12 @@ class VanishingLines {
   private float hueChange;
   private float brightChange;
   private float satChange;
-
+  
+  /* Initialize variables.
+  * @param canvas The canvas to draw on. 
+  * @param vp The vanishing point to use.
+  * @param c The color to base lines colors off of. 
+  */
   VanishingLines(PApplet canvas, VanishingPoint vp, color c) {
     this.canvas = canvas;
     this.vp = vp;
@@ -16,15 +27,22 @@ class VanishingLines {
     brightChange = random(0, 60);
     satChange = random(0, 40);
   }
-
-  public void display() {
-    display(this.vp);
-  }
-
+  
+  /* Change the base color of lines. 
+  * @param c The color to base lines colors off of. 
+  */
   public void setColor(color c) {
     baseColor = c;
   }
 
+  /* Draw vanishing lines. */
+  public void display() {
+    display(this.vp);
+  }
+  
+  /* Draw vanishing lines. 
+  * @param vp The vanishing points to use. 
+  */
   public void display(VanishingPoint vp) {
     float cX = vp.getX();
     float cY = vp.getY();
@@ -57,7 +75,13 @@ class VanishingLines {
     canvas.line(0, cY, canvas.width, cY);
     canvas.line(cX, 0, cX, canvas.height);
   };
-
+  
+  /* Convenience function to transform a color in HSV mode. 
+  * @param c The color to modify. 
+  * @param hueChange Amount to change the hue. 
+  * @param brightChange Amount to change the brightness.
+  * @param satChange Amount to change the saturation. 
+  */
   public color transformColor(color c, float hueChange, float brightChange, float satChange) {
     float hue = hue(c) + hueChange;
     hue = constrain(hue, 0, 100);
